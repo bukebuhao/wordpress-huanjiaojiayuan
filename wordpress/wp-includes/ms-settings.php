@@ -31,7 +31,7 @@ if ( !isset( $current_site ) || !isset( $current_blog ) ) {
 			$domain = substr( $domain, 0, -4 );
 			$_SERVER['HTTP_HOST'] = substr( $_SERVER['HTTP_HOST'], 0, -4 );
 		} else {
-			wp_die( /*WP_I18N_NO_PORT_NUMBER*/'Multisite only works without the port number in the URL.'/*/WP_I18N_NO_PORT_NUMBER*/ );
+			wp_die( /*WP_I18N_NO_PORT_NUMBER*/'多站点功能仅能工作在 URL 中无端口号的情况下。'/*/WP_I18N_NO_PORT_NUMBER*/ );
 		}
 	}
 
@@ -116,8 +116,8 @@ if ( !isset( $current_site ) || !isset( $current_blog ) ) {
 		if ( defined( 'WP_INSTALLING' ) ) {
 			$current_blog->blog_id = $blog_id = 1;
 		} else {
-			$msg = ! $wpdb->get_var( "SHOW TABLES LIKE '$wpdb->site'" ) ? ' ' . /*WP_I18N_TABLES_MISSING*/'Database tables are missing.'/*/WP_I18N_TABLES_MISSING*/ : '';
-			wp_die( /*WP_I18N_NO_BLOG*/'No site by that name on this system.'/*/WP_I18N_NO_BLOG*/ . $msg );
+			$msg = ! $wpdb->get_var( "SHOW TABLES LIKE '$wpdb->site'" ) ? ' ' . /*WP_I18N_TABLES_MISSING*/'数据表缺失。'/*/WP_I18N_TABLES_MISSING*/ : '';
+			wp_die( /*WP_I18N_NO_BLOG*/'系统中没有该名字的站点。'/*/WP_I18N_NO_BLOG*/ . $msg );
 		}
 	}
 }

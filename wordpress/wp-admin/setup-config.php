@@ -44,26 +44,23 @@ define('WP_DEBUG', false);
 require_once(ABSPATH . WPINC . '/load.php');
 require_once(ABSPATH . WPINC . '/version.php');
 wp_check_php_mysql_versions();
-wp_unregister_GLOBALS();
 
 require_once(ABSPATH . WPINC . '/compat.php');
 require_once(ABSPATH . WPINC . '/functions.php');
 require_once(ABSPATH . WPINC . '/class-wp-error.php');
-require_once(ABSPATH . WPINC . '/formatting.php');
-wp_magic_quotes();
 
 if (!file_exists(ABSPATH . 'wp-config-sample.php'))
-	wp_die('Sorry, I need a wp-config-sample.php file to work from. Please re-upload this file from your WordPress installation.');
+	wp_die('抱歉，我需要 wp-config-sample.php 文件作为向导工作的基础，请重新上传此文件。');
 
 $configFile = file(ABSPATH . 'wp-config-sample.php');
 
 // Check if wp-config.php has been created
 if (file_exists(ABSPATH . 'wp-config.php'))
-	wp_die("<p>The file 'wp-config.php' already exists. If you need to reset any of the configuration items in this file, please delete it first. You may try <a href='install.php'>installing now</a>.</p>");
+	wp_die("<p>'wp-config.php' 文件已存在。若您希望重新配置这个安装，请先删除它。您可以尝试<a href='install.php'>现在安装</a>。</p>");
 
 // Check if wp-config.php exists above the root directory but is not part of another install
 if (file_exists(ABSPATH . '../wp-config.php') && ! file_exists(ABSPATH . '../wp-settings.php'))
-	wp_die("<p>The file 'wp-config.php' already exists one level above your WordPress installation. If you need to reset any of the configuration items in this file, please delete it first. You may try <a href='install.php'>installing now</a>.</p>");
+	wp_die("<p>“wp-config.php”文件已存在于 WordPress 目录的上级目录。若您希望重新配置这个安装，请先删除它。您可以尝试<a href='install.php'>现在安装</a>。</p>");
 
 if (isset($_GET['step']))
 	$step = $_GET['step'];
@@ -85,7 +82,7 @@ function display_header() {
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>WordPress &rsaquo; Setup Configuration File</title>
+<title>WordPress &rsaquo; 准备配置文件</title>
 <link rel="stylesheet" href="css/install.css" type="text/css" />
 
 </head>
@@ -99,18 +96,18 @@ switch($step) {
 		display_header();
 ?>
 
-<p>Welcome to WordPress. Before getting started, we need some information on the database. You will need to know the following items before proceeding.</p>
+<p>欢迎使用 WordPress！在您开始使用前，WordPress 需要一些数据库的信息。下列信息将会被问到，请做好准备。</p>
 <ol>
-	<li>Database name</li>
-	<li>Database username</li>
-	<li>Database password</li>
-	<li>Database host</li>
-	<li>Table prefix (if you want to run more than one WordPress in a single database) </li>
+	<li>数据库名</li>
+	<li>数据库用户用户名</li>
+	<li>数据库用户密码</li>
+	<li>数据库主机</li>
+	<li>表名前缀（若您希望在一个数据表中安装多个 WordPress）</li>
 </ol>
-<p><strong>If for any reason this automatic file creation doesn't work, don't worry. All this does is fill in the database information to a configuration file. You may also simply open <code>wp-config-sample.php</code> in a text editor, fill in your information, and save it as <code>wp-config.php</code>. </strong></p>
-<p>In all likelihood, these items were supplied to you by your Web Host. If you do not have this information, then you will need to contact them before you can continue. If you&#8217;re all ready&hellip;</p>
+<p><strong>出于各种原因，自动创建文件可能失败，但本向导只是助您在配置文件中写如数据库信息。如果失败，您只需用文本编辑器打开 <code>wp-config-sample.php</code>，填入您的信息，另存为 <code>wp-config.php</code> 即可。</strong></p>
+<p>大多数的互联网主机服务提供商都向您提供了数据库的信息。若您不知道这些信息，您需要先询问好，再进行安装。若您已准备好&hellip;</p>
 
-<p class="step"><a href="setup-config.php?step=1<?php if ( isset( $_GET['noapi'] ) ) echo '&amp;noapi'; ?>" class="button">Let&#8217;s go!</a></p>
+<p class="step"><a href="setup-config.php?step=1<?php if ( isset( $_GET['noapi'] ) ) echo '&amp;noapi'; ?>" class="button">现在就开始！</a></p>
 <?php
 	break;
 
@@ -118,36 +115,36 @@ switch($step) {
 		display_header();
 	?>
 <form method="post" action="setup-config.php?step=2">
-	<p>Below you should enter your database connection details. If you're not sure about these, contact your host. </p>
+	<p>请在下方输入数据库相关信息。若您不清楚，请咨询主机提供商。</p>
 	<table class="form-table">
 		<tr>
-			<th scope="row"><label for="dbname">Database Name</label></th>
+			<th scope="row"><label for="dbname">数据库名</label></th>
 			<td><input name="dbname" id="dbname" type="text" size="25" value="wordpress" /></td>
-			<td>The name of the database you want to run WP in. </td>
+			<td>您希望 WordPress 使用哪个数据库运行？</td>
 		</tr>
 		<tr>
-			<th scope="row"><label for="uname">User Name</label></th>
+			<th scope="row"><label for="uname">用户名</label></th>
 			<td><input name="uname" id="uname" type="text" size="25" value="username" /></td>
-			<td>Your MySQL username</td>
+			<td>您的 MySQL 用户名</td>
 		</tr>
 		<tr>
-			<th scope="row"><label for="pwd">Password</label></th>
+			<th scope="row"><label for="pwd">密码</label></th>
 			<td><input name="pwd" id="pwd" type="text" size="25" value="password" /></td>
-			<td>...and your MySQL password.</td>
+			<td>...以及您的 MySQL 密码。</td>
 		</tr>
 		<tr>
-			<th scope="row"><label for="dbhost">Database Host</label></th>
+			<th scope="row"><label for="dbhost">数据库主机</label></th>
 			<td><input name="dbhost" id="dbhost" type="text" size="25" value="localhost" /></td>
-			<td>You should be able to get this info from your web host, if <code>localhost</code> does not work.</td>
+			<td>通常情况下，应填写 <code>localhost</code>，若测试连接失败，请联系主机提供商咨询。</td>
 		</tr>
 		<tr>
-			<th scope="row"><label for="prefix">Table Prefix</label></th>
+			<th scope="row"><label for="prefix">表名前缀</label></th>
 			<td><input name="prefix" id="prefix" type="text" value="wp_" size="25" /></td>
-			<td>If you want to run multiple WordPress installations in a single database, change this.</td>
+			<td>若您希望在一个数据库中存放多个 WordPress 的数据，请修改本项以做区分。</td>
 		</tr>
 	</table>
 	<?php if ( isset( $_GET['noapi'] ) ) { ?><input name="noapi" type="hidden" value="true" /><?php } ?>
-	<p class="step"><input name="submit" type="submit" value="Submit" class="button" /></p>
+	<p class="step"><input name="submit" type="submit" value="提交" class="button" /></p>
 </form>
 <?php
 	break;
@@ -163,7 +160,7 @@ switch($step) {
 
 	// Validate $prefix: it can only contain letters, numbers and underscores
 	if ( preg_match( '|[^a-z0-9_]|i', $prefix ) )
-		wp_die( /*WP_I18N_BAD_PREFIX*/'<strong>ERROR</strong>: "Table Prefix" can only contain numbers, letters, and underscores.'/*/WP_I18N_BAD_PREFIX*/ );
+		wp_die( /*WP_I18N_BAD_PREFIX*/'<strong>错误</strong>：“表前缀”只能包含数字、字母和下划线。'/*/WP_I18N_BAD_PREFIX*/ );
 
 	// Test the db connection.
 	/**#@+
@@ -178,7 +175,7 @@ switch($step) {
 	// We'll fail here if the values are no good.
 	require_wp_db();
 	if ( ! empty( $wpdb->error ) ) {
-		$back = '<p class="step"><a href="setup-config.php?step=1" onclick="javascript:history.go(-1);return false;" class="button">Try Again</a></p>';
+		$back = '<p class="step"><a href="setup-config.php?step=1" onclick="javascript:history.go(-1);return false;" class="button">重试</a></p>';
 		wp_die( $wpdb->error->get_error_message() . $back );
 	}
 
@@ -247,15 +244,15 @@ switch($step) {
 	if ( ! is_writable(ABSPATH) ) :
 		display_header();
 ?>
-<p>Sorry, but I can't write the <code>wp-config.php</code> file.</p>
-<p>You can create the <code>wp-config.php</code> manually and paste the following text into it.</p>
+<p>抱歉，无法写入 <code>wp-config.php</code> 文件。</p>
+<p>您可手动创建 <code>wp-config.php</code>，并复制如下代码至其中。</p>
 <textarea cols="98" rows="15" class="code"><?php
 		foreach( $configFile as $line ) {
 			echo htmlentities($line, ENT_COMPAT, 'UTF-8');
 		}
 ?></textarea>
-<p>After you've done that, click "Run the install."</p>
-<p class="step"><a href="install.php" class="button">Run the install</a></p>
+<p>完成之后，请点击“进行安装”。</p>
+<p class="step"><a href="install.php" class="button">进行安装</a></p>
 <?php
 	else :
 		$handle = fopen(ABSPATH . 'wp-config.php', 'w');
@@ -266,9 +263,9 @@ switch($step) {
 		chmod(ABSPATH . 'wp-config.php', 0666);
 		display_header();
 ?>
-<p>All right sparky! You've made it through this part of the installation. WordPress can now communicate with your database. If you are ready, time now to&hellip;</p>
+<p>非常好！您已顺利完成安装中的这一步骤，WordPress 已经可以和您的数据库沟通。若您准备好了，现在就&hellip;</p>
 
-<p class="step"><a href="install.php" class="button">Run the install</a></p>
+<p class="step"><a href="install.php" class="button">进行安装</a></p>
 <?php
 	endif;
 	break;

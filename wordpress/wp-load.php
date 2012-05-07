@@ -53,7 +53,7 @@ if ( file_exists( ABSPATH . 'wp-config.php') ) {
 	require_once( ABSPATH . '/wp-includes/functions.php' );
 	require_once( ABSPATH . '/wp-includes/plugin.php' );
 	$text_direction = /*WP_I18N_TEXT_DIRECTION*/'ltr'/*/WP_I18N_TEXT_DIRECTION*/;
-	wp_die(sprintf(/*WP_I18N_NO_CONFIG*/"<p>There doesn't seem to be a <code>wp-config.php</code> file. I need this before we can get started.</p> <p>Need more help? <a href='http://codex.wordpress.org/Editing_wp-config.php'>We got it</a>.</p> <p>You can create a <code>wp-config.php</code> file through a web interface, but this doesn't work for all server setups. The safest way is to manually create the file.</p><p><a href='%ssetup-config.php' class='button'>Create a Configuration File</a></p>"/*/WP_I18N_NO_CONFIG*/, $path), /*WP_I18N_ERROR_TITLE*/'WordPress &rsaquo; Error'/*/WP_I18N_ERROR_TITLE*/, array('text_direction' => $text_direction));
+	wp_die(sprintf(/*WP_I18N_NO_CONFIG*/'<p>看起来 <code>wp-config.php</code> 文件不存在。必须要有这个文件才能开始。</p> <p>需要帮助？<a href=\'http://codex.wordpress.org/zh-cn:Editing_wp-config.php\'>请看文档</a>。</p> <p>您可以通过下面按钮进入方便的网页界面来编辑 <code>wp-config.php</code> 文件，但这个界面不一定在所有服务器上都能使用。最安全的方法是手动创建文件。</p><p><a href=\'%ssetup-config.php\' class=\'button\'>创建一个配置文件</a></p>'/*/WP_I18N_NO_CONFIG*/, $path), /*WP_I18N_ERROR_TITLE*/'WordPress &rsaquo; 错误'/*/WP_I18N_ERROR_TITLE*/, array('text_direction' => $text_direction));
 
 }
 
