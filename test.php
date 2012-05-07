@@ -4,3 +4,4 @@ phpinfo();
 time();
 //doc
 //remote
+//local
